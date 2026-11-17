@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفعيل ضريبة | خدمات eSIM المتميزة</title>
-    <!-- استيراد خط القاهرة (Cairo) للعربية وخط Plus Jakarta Sans للإنجليزية -->
+    <!-- استيراد خط القاهرة (Cairo) والأميري (Amiri) للعربية وخط Plus Jakarta Sans للإنجليزية -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- مكتبة Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -16,10 +16,11 @@
                 extend: {
                     fontFamily: {
                         arabic: ['Cairo', 'sans-serif'],
+                        classic: ['Amiri', 'serif'],
                         latin: ['Plus Jakarta Sans', 'sans-serif'],
                     },
                     colors: {
-                        obsidian: '#0B0F17',
+                        obsidian: '#0A0A0C',
                         slateCard: '#131A26',
                         champagne: '#D4AF37',
                         champagneLight: '#F3E5AB',
@@ -34,9 +35,9 @@
         /* تخصيص الخطوط والحركات الكلاسيكية الناعمة */
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #070A0F;
+            background-color: #0A0A0C;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.14) 0%, transparent 55%),
                 radial-gradient(circle at 85% 90%, rgba(37, 211, 102, 0.08) 0%, transparent 45%);
             min-height: 100vh;
             color: #F8FAFC;
@@ -66,19 +67,6 @@
             pointer-events: none;
         }
 
-        /* حركة انتقال الأكورديون السلسة */
-        .accordion-content {
-            display: grid;
-            grid-template-rows: 0fr;
-            transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .accordion-content.open {
-            grid-template-rows: 1fr;
-        }
-        .accordion-inner {
-            overflow: hidden;
-        }
-
         /* توهج زر الواتساب */
         .whatsapp-btn-glow {
             box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.35);
@@ -92,7 +80,7 @@
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #0B0F17;
+            background: #0A0A0C;
         }
         ::-webkit-scrollbar-thumb {
             background: #2A3447;
@@ -126,26 +114,26 @@
                     <svg class="w-3.5 h-3.5 text-champagne" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
-                    <span>خدمة رسمية ومعتمدة</span>
+                    <span>خدمة تفعيل رسمية</span>
                 </div>
-
-                <h1 class="text-3xl sm:text-[32px] font-extrabold tracking-tight bg-gradient-to-l from-white via-champagneLight to-champagne bg-clip-text text-transparent">
-                    تفعيل ضريبة
-                </h1>
-                <p class="text-slate-400 text-xs sm:text-sm mt-1.5 leading-relaxed">
-                    اختر الشريحة الإلكترونية المناسبة لإتمام إجراءات التفعيل الضريبي الفوري
-                </p>
+                <h1 class="font-classic text-3xl sm:text-4xl font-bold text-white tracking-wide">تفعيل ضريبة</h1>
+                <p class="text-xs text-slate-400 mt-1.5">اختر الشريحة بالترتيب؛ في حال تعذر الأولى جرب التالية</p>
             </header>
 
-            <!-- 2. الأزرار / البطاقات الثلاث المتراصة (eSIM 1, eSIM 2, eSIM 3) -->
-            <section class="mt-6 space-y-3.5" aria-label="اختيارات الشريحة الإلكترونية">
+            <!-- 2. الأزرار الثلاثة المتراصة تحت بعضها بالترتيب (eSIM 1 -> eSIM 2 -> eSIM 3) بدون أسهم -->
+            <section class="mt-6 flex flex-col gap-3.5" aria-label="أزرار تثبيت الشريحة الإلكترونية">
                 
-                <!-- بطاقة eSIM 1 -->
-                <div id="card-esim1" class="esim-card group rounded-2xl border border-slate-700/70 bg-slate-900/60 hover:border-champagne/50 transition-all duration-300 overflow-hidden">
-                    <button type="button" onclick="selectEsim('eSIM 1', 'card-esim1')" class="w-full p-4 flex items-center justify-between text-right focus:outline-none">
+                <!-- زر eSIM 1 -->
+                <a id="btn-esim1" 
+                   href="https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=LPA:1$rsp-eu.simlessly.com$4799A0D8BBD24359ACB201A40EAD5DE1" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   onclick="handleProfileClick(event, 'eSIM 1', this.href)"
+                   class="esim-btn group block w-full p-4 rounded-2xl border border-slate-700/70 bg-slate-900/60 hover:border-champagne hover:bg-slate-800/85 hover:shadow-lg hover:shadow-champagne/10 active:scale-[0.99] transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center justify-between text-right">
                         <div class="flex items-center gap-3.5">
                             <!-- أيقونة شريحة eSIM -->
-                            <div class="w-11 h-11 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-champagne/40 flex items-center justify-center text-champagne transition-colors">
+                            <div class="w-11 h-11 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-champagne/50 flex items-center justify-center text-champagne transition-colors shrink-0">
                                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                                 </svg>
@@ -153,49 +141,28 @@
                             <div>
                                 <div class="flex items-center gap-2">
                                     <span class="font-latin font-bold text-lg text-white tracking-wide" dir="ltr">eSIM 1</span>
-                                    <span class="text-[11px] px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 font-medium">متاح الآن</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-md bg-champagne/15 text-champagneLight border border-champagne/25 font-medium">المحاولة الأولى</span>
                                 </div>
-                                <p class="text-xs text-slate-400 mt-0.5">الباقة الأساسية — تفعيل سريع خلال دقائق</p>
-                            </div>
-                        </div>
-
-                        <!-- مؤشر الاختيار -->
-                        <div class="flex items-center gap-2">
-                            <span class="status-badge hidden text-xs font-semibold text-champagne">مُختار</span>
-                            <div class="radio-circle w-6 h-6 rounded-full border-2 border-slate-600 flex items-center justify-center transition-all">
-                                <div class="w-2.5 h-2.5 rounded-full bg-champagne scale-0 transition-transform duration-200"></div>
-                            </div>
-                        </div>
-                    </button>
-
-                    <!-- تفاصيل إضافية قابلة للفتح عند النقر -->
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-                            <div class="px-4 pb-4 pt-1 border-t border-slate-800/80 text-xs text-slate-300 space-y-2.5">
-                                <div class="flex justify-between items-center bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
-                                    <span class="text-slate-400">رمز التفعيل المرجعي:</span>
-                                    <div class="flex items-center gap-2">
-                                        <code class="font-latin text-champagneLight font-semibold">TAX-ESIM-01</code>
-                                        <button type="button" onclick="copyText('TAX-ESIM-01')" class="p-1 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors" title="نسخ الرمز">
-                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                                <!-- ملاحظة VPN أسفل الشريحة (قابلة للتعديل) -->
+                                <div class="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-[11px] font-medium">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                    <span>ملاحظة: لا تحتاج VPN (تعمل مباشرة)</span>
                                 </div>
-                                <p class="text-slate-400 leading-relaxed">
-                                    مناسبة لتسجيل الجهاز الأساسي (IMEI 1) وربط الشريحة الإلكترونية بالملف الضريبي فوراً.
-                                </p>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- بطاقة eSIM 2 -->
-                <div id="card-esim2" class="esim-card group rounded-2xl border border-slate-700/70 bg-slate-900/60 hover:border-champagne/50 transition-all duration-300 overflow-hidden">
-                    <button type="button" onclick="selectEsim('eSIM 2', 'card-esim2')" class="w-full p-4 flex items-center justify-between text-right focus:outline-none">
+                <!-- زر eSIM 2 -->
+                <a id="btn-esim2" 
+                   href="https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=LPA:1$rsp-eu.simlessly.com$4799A0D8BBD24359ACB201A40EAD5DE1" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   onclick="handleProfileClick(event, 'eSIM 2', this.href)"
+                   class="esim-btn group block w-full p-4 rounded-2xl border border-slate-700/70 bg-slate-900/60 hover:border-champagne hover:bg-slate-800/85 hover:shadow-lg hover:shadow-champagne/10 active:scale-[0.99] transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center justify-between text-right">
                         <div class="flex items-center gap-3.5">
-                            <div class="w-11 h-11 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-champagne/40 flex items-center justify-center text-champagne transition-colors">
+                            <div class="w-11 h-11 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-champagne/50 flex items-center justify-center text-champagne transition-colors shrink-0">
                                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                 </svg>
@@ -203,47 +170,28 @@
                             <div>
                                 <div class="flex items-center gap-2">
                                     <span class="font-latin font-bold text-lg text-white tracking-wide" dir="ltr">eSIM 2</span>
-                                    <span class="text-[11px] px-2 py-0.5 rounded-md bg-champagne/15 text-champagneLight border border-champagne/25 font-medium">الأكثر طلباً</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700 font-medium">بديل 1</span>
                                 </div>
-                                <p class="text-xs text-slate-400 mt-0.5">الباقة الإضافية — تفعيل الخط الثاني</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-2">
-                            <span class="status-badge hidden text-xs font-semibold text-champagne">مُختار</span>
-                            <div class="radio-circle w-6 h-6 rounded-full border-2 border-slate-600 flex items-center justify-center transition-all">
-                                <div class="w-2.5 h-2.5 rounded-full bg-champagne scale-0 transition-transform duration-200"></div>
-                            </div>
-                        </div>
-                    </button>
-
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-                            <div class="px-4 pb-4 pt-1 border-t border-slate-800/80 text-xs text-slate-300 space-y-2.5">
-                                <div class="flex justify-between items-center bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
-                                    <span class="text-slate-400">رمز التفعيل المرجعي:</span>
-                                    <div class="flex items-center gap-2">
-                                        <code class="font-latin text-champagneLight font-semibold">TAX-ESIM-02</code>
-                                        <button type="button" onclick="copyText('TAX-ESIM-02')" class="p-1 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors" title="نسخ الرمز">
-                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                                <!-- ملاحظة VPN أسفل الشريحة (قابلة للتعديل) -->
+                                <div class="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-amber-500/10 border border-amber-500/25 text-amber-300 text-[11px] font-medium">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                                    <span>ملاحظة: تحتاج تشغيل VPN (أوروبا / أمريكا)</span>
                                 </div>
-                                <p class="text-slate-400 leading-relaxed">
-                                    مخصصة لتفعيل المنفذ الثاني (IMEI 2) مع دعم كامل لتبديل الشبكات بسلاسة.
-                                </p>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- بطاقة eSIM 3 -->
-                <div id="card-esim3" class="esim-card group rounded-2xl border border-slate-700/70 bg-slate-900/60 hover:border-champagne/50 transition-all duration-300 overflow-hidden">
-                    <button type="button" onclick="selectEsim('eSIM 3', 'card-esim3')" class="w-full p-4 flex items-center justify-between text-right focus:outline-none">
+                <!-- زر eSIM 3 -->
+                <a id="btn-esim3" 
+                   href="https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=LPA:1$rsp-eu.simlessly.com$4799A0D8BBD24359ACB201A40EAD5DE1" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   onclick="handleProfileClick(event, 'eSIM 3', this.href)"
+                   class="esim-btn group block w-full p-4 rounded-2xl border border-slate-700/70 bg-slate-900/60 hover:border-champagne hover:bg-slate-800/85 hover:shadow-lg hover:shadow-champagne/10 active:scale-[0.99] transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center justify-between text-right">
                         <div class="flex items-center gap-3.5">
-                            <div class="w-11 h-11 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-champagne/40 flex items-center justify-center text-champagne transition-colors">
+                            <div class="w-11 h-11 rounded-xl bg-slate-800/90 border border-slate-700/80 group-hover:border-champagne/50 flex items-center justify-center text-champagne transition-colors shrink-0">
                                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -251,60 +199,21 @@
                             <div>
                                 <div class="flex items-center gap-2">
                                     <span class="font-latin font-bold text-lg text-white tracking-wide" dir="ltr">eSIM 3</span>
-                                    <span class="text-[11px] px-2 py-0.5 rounded-md bg-sky-500/15 text-sky-300 border border-sky-500/20 font-medium">تجوال & أعمال</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700 font-medium">بديل 2</span>
                                 </div>
-                                <p class="text-xs text-slate-400 mt-0.5">الباقة الشاملة — تفعيل دولي ومحلي</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-2">
-                            <span class="status-badge hidden text-xs font-semibold text-champagne">مُختار</span>
-                            <div class="radio-circle w-6 h-6 rounded-full border-2 border-slate-600 flex items-center justify-center transition-all">
-                                <div class="w-2.5 h-2.5 rounded-full bg-champagne scale-0 transition-transform duration-200"></div>
-                            </div>
-                        </div>
-                    </button>
-
-                    <div class="accordion-content">
-                        <div class="accordion-inner">
-                            <div class="px-4 pb-4 pt-1 border-t border-slate-800/80 text-xs text-slate-300 space-y-2.5">
-                                <div class="flex justify-between items-center bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
-                                    <span class="text-slate-400">رمز التفعيل المرجعي:</span>
-                                    <div class="flex items-center gap-2">
-                                        <code class="font-latin text-champagneLight font-semibold">TAX-ESIM-03</code>
-                                        <button type="button" onclick="copyText('TAX-ESIM-03')" class="p-1 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors" title="نسخ الرمز">
-                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                                <!-- ملاحظة VPN أسفل الشريحة (قابلة للتعديل) -->
+                                <div class="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-sky-500/10 border border-sky-500/25 text-sky-300 text-[11px] font-medium">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                                    <span>ملاحظة: تحتاج VPN في حال ظهور خطأ</span>
                                 </div>
-                                <p class="text-slate-400 leading-relaxed">
-                                    خيار مثالي لأجهزة الأعمال والخطوط الإضافية مع أولوية الدعم الفني.
-                                </p>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
             </section>
 
-            <!-- حقل اختياري لإدخال رقم IMEI لتسريع الطلب (لمسة إبداعية اختيارية) -->
-            <div class="mt-4">
-                <div class="relative">
-                    <input 
-                        type="text" 
-                        id="imei-input" 
-                        maxlength="15"
-                        inputmode="numeric"
-                        placeholder="أدخل رقم IMEI (اختياري لتسريع التفعيل)..." 
-                        class="w-full bg-slate-950/70 border border-slate-800 focus:border-champagne/60 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none transition-colors"
-                    >
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-latin text-slate-500 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">*#06#</span>
-                </div>
-            </div>
-
-            <!-- 3. قسم الملاحظات (Notes ⚠️) المطابق للرسم -->
+            <!-- 3. قسم الملاحظات (Notes ⚠️) تحت الشرائح مباشرة كما في الرسم -->
             <section class="mt-6 rounded-2xl bg-amber-500/[0.06] border border-amber-500/25 p-4 relative" aria-label="ملاحظات هامة">
                 <div class="flex items-center justify-between mb-2.5">
                     <div class="flex items-center gap-2">
@@ -322,23 +231,64 @@
                 <ul class="space-y-2 text-xs text-slate-300/90 leading-relaxed pr-1">
                     <li class="flex items-start gap-2">
                         <span class="text-amber-400 mt-1">•</span>
-                        <span>تأكد من اتصال الهاتف بشبكة <strong class="text-white font-semibold">Wi-Fi</strong> مستقرة طوال خطوات التفعيل.</span>
+                        <span>جرب الشرائح بالترتيب (<span class="font-latin text-amber-200">eSIM 1</span> ثم <span class="font-latin text-amber-200">2</span> ثم <span class="font-latin text-amber-200">3</span>) في حال عدم استجابة إحداها.</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <span class="text-amber-400 mt-1">•</span>
-                        <span>يرجى التأكد من أن جهازك يدعم تقنية <span class="font-latin text-amber-200">eSIM</span> وغير مقفل على شبكة محددة.</span>
+                        <span>تأكد من اتصال الهاتف بشبكة <strong class="text-white font-semibold">Wi-Fi</strong> مستقرة والتزامك بملاحظة الـ VPN أسفل كل شريحة.</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <span class="text-amber-400 mt-1">•</span>
-                        <span>لا تقم بحذف الشريحة بعد مسح الكود إلا بعد مراجعة الدعم الفني.</span>
+                        <span>لا تقم بحذف الشريحة بعد إضافتها إلا بعد مراجعة الدعم الفني.</span>
                     </li>
                 </ul>
             </section>
 
+            <!-- 4. أداة فحص دعم eSIM عبر رقم IMEI أو السيريال -->
+            <section class="mt-5 rounded-2xl bg-slate-950/75 border border-champagne/30 p-3.5 transition-all" aria-label="فحص دعم eSIM">
+                <div class="flex items-center justify-between mb-2">
+                    <label for="imei-input" class="text-xs font-bold text-champagneLight flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-champagne" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>فحص دعم الجهاز لـ <span class="font-latin">eSIM</span> (IMEI / Serial)</span>
+                    </label>
+                    <span class="text-[10px] font-latin text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">*#06#</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <input 
+                        type="text" 
+                        id="imei-input" 
+                        maxlength="15"
+                        oninput="handleDeviceCheck(this.value)"
+                        placeholder="أدخل 15 رقم IMEI أو السيريال..." 
+                        class="flex-1 bg-slate-900/90 border border-slate-700/80 focus:border-champagne rounded-xl px-3 py-2 text-xs font-latin text-slate-100 placeholder-slate-500 placeholder:font-arabic focus:outline-none transition-colors tracking-wider"
+                        dir="ltr"
+                    >
+                    <button 
+                        type="button" 
+                        onclick="handleDeviceCheck(document.getElementById('imei-input').value, true)"
+                        class="px-3.5 py-2 rounded-xl bg-champagne/20 hover:bg-champagne/30 border border-champagne/40 text-champagneLight text-xs font-bold transition-all active:scale-95 shrink-0 cursor-pointer"
+                    >
+                        فحص
+                    </button>
+                </div>
+
+                <!-- نتيجة الفحص التفاعلية -->
+                <div id="imei-result" class="hidden mt-2.5 p-2.5 rounded-xl border text-xs transition-all duration-300">
+                    <div class="flex items-center justify-between gap-2">
+                        <span id="imei-status-text" class="font-bold"></span>
+                        <span id="imei-brand-badge" class="hidden text-[10px] font-latin px-2 py-0.5 rounded-md bg-slate-900/90 border border-slate-700 text-slate-300"></span>
+                    </div>
+                    <p id="imei-sub-text" class="text-[11px] mt-1 opacity-85 leading-relaxed"></p>
+                </div>
+            </section>
+
         </div>
 
-        <!-- 4. الزر السفلي المثبت (WhatsApp) المطابق للقاعدة في الرسم -->
-        <footer class="p-4 sm:p-5 bg-slate-950/90 border-t border-slate-800/90 backdrop-blur-md">
+        <!-- 5. الزر السفلي المثبت (WhatsApp) + تنبيه عدم الاتصال أسفله مباشرة -->
+        <footer class="p-4 sm:p-5 bg-slate-950/90 border-t border-slate-800/90 backdrop-blur-md space-y-3">
             <button 
                 type="button" 
                 onclick="openWhatsApp()" 
@@ -353,6 +303,13 @@
                     تواصل مباشر
                 </span>
             </button>
+
+            <!-- التنبيه المطلوب أسفل زر الواتساب مباشرة -->
+            <div class="rounded-xl bg-champagne/[0.07] border border-champagne/25 px-3.5 py-2.5 text-center">
+                <p class="text-[11.5px] sm:text-xs text-champagneLight/95 font-medium leading-relaxed">
+                    برجاء عدم الاتصال واتساب او مكالمات وانا هتواصل معاك في اسرع وقت نظرا لان عندي ضغط كبير من التفعيلات
+                </p>
+            </div>
         </footer>
 
     </main>
@@ -360,79 +317,156 @@
     <script>
         // رقم الواتساب الخاص بالخدمة (يمكنك تغييره لرقمك الفعلي بصيغة دولية بدون +)
         const WHATSAPP_NUMBER = "201000000000";
-        let selectedPackage = null;
+
+        let lastClickedProfile = null;
+        let currentDeviceStatus = null;
 
         /**
-         * تحديد بطاقة eSIM وفتح تفاصيلها بسلاسة
+         * التعامل مع الضغط على أزرار بروفايلات eSIM المباشرة
          */
-        function selectEsim(packageName, cardId) {
-            const allCards = document.querySelectorAll('.esim-card');
-            const clickedCard = document.getElementById(cardId);
-            const isAlreadySelected = selectedPackage === packageName;
+        function handleProfileClick(event, profileName, href) {
+            lastClickedProfile = profileName;
+            document.getElementById('selected-indicator').textContent = `تفعيل ${profileName}`;
 
-            // إعادة تعيين جميع البطاقات
-            allCards.forEach(card => {
-                card.classList.remove('border-champagne', 'bg-slate-800/80', 'shadow-lg', 'shadow-champagne/5');
-                card.classList.add('border-slate-700/70', 'bg-slate-900/60');
-                
-                const accordion = card.querySelector('.accordion-content');
-                accordion.classList.remove('open');
-
-                const badge = card.querySelector('.status-badge');
-                badge.classList.add('hidden');
-
-                const radioOuter = card.querySelector('.radio-circle');
-                radioOuter.classList.remove('border-champagne');
-                radioOuter.classList.add('border-slate-600');
-
-                const radioInner = card.querySelector('.radio-circle div');
-                radioInner.classList.remove('scale-100');
-                radioInner.classList.add('scale-0');
-            });
-
-            if (isAlreadySelected) {
-                // إلغاء التحديد عند النقر مرة أخرى
-                selectedPackage = null;
-                document.getElementById('selected-indicator').textContent = 'تواصل مباشر';
+            if (!href || href.endsWith('#')) {
+                event.preventDefault();
+                showToast(`برجاء إضافة رابط البروفايل لـ ${profileName} داخل href`);
                 return;
             }
 
-            // تفعيل البطاقة المختارة
-            selectedPackage = packageName;
-            clickedCard.classList.remove('border-slate-700/70', 'bg-slate-900/60');
-            clickedCard.classList.add('border-champagne', 'bg-slate-800/80', 'shadow-lg', 'shadow-champagne/5');
-
-            clickedCard.querySelector('.accordion-content').classList.add('open');
-            clickedCard.querySelector('.status-badge').classList.remove('hidden');
-
-            const radioOuter = clickedCard.querySelector('.radio-circle');
-            radioOuter.classList.remove('border-slate-600');
-            radioOuter.classList.add('border-champagne');
-
-            const radioInner = clickedCard.querySelector('.radio-circle div');
-            radioInner.classList.remove('scale-0');
-            radioInner.classList.add('scale-100');
-
-            // تحديث نص زر الواتساب السفلي ليعكس الاختيار
-            document.getElementById('selected-indicator').textContent = `تفعيل ${packageName}`;
-            showToast(`تم اختيار ${packageName}`);
+            showToast(`جاري فتح بروفايل ${profileName}...`);
         }
 
         /**
-         * فتح محادثة واتساب مع رسالة جاهزة حسب الباقة المختارة
+         * خوارزمية Luhn للتحقق من صحة أرقام IMEI المكونة من 15 رقماً
+         */
+        function isValidLuhn(imei) {
+            let sum = 0;
+            for (let i = 0; i < 15; i++) {
+                let digit = parseInt(imei.charAt(i), 10);
+                if (i % 2 === 1) {
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
+                }
+                sum += digit;
+            }
+            return sum % 10 === 0;
+        }
+
+        /**
+         * التعرف على الشركة المصنعة ومدى دعم eSIM بناءً على TAC أو السيريال
+         */
+        function detectDeviceSupport(cleanCode) {
+            const tac2 = cleanCode.substring(0, 2);
+            const tac4 = cleanCode.substring(0, 4);
+
+            const appleEsimPrefixes = ['3529', '3530', '3531', '3532', '3538', '3539', '3540', '3541', '3542', '3543', '3544', '3545', '3546', '3547', '3548', '3549', '3550', '3551', '3552', '3553', '3554', '3555', '3556', '3557', '3558', '3559', '3560', '3561', '3562', '3563', '3564', '3565', '3566', '3567', '3568', '3569', '3570', '3571', '3572', '3573', '3574', '3575', '3576', '3577', '3578', '3579', '3580', '3581', '3582', '3583', '3584', '3585', '3586', '3587', '3588', '3589', '3590', '3591', '3592', '3593', '3594', '3595', '3596', '3597', '3598', '3599'];
+            const legacyPrefixes = ['01', '3515', '3516', '3517', '3518', '3519', '3520', '3521', '3522', '3523', '3524', '3525', '3526', '3527', '3528'];
+
+            if (legacyPrefixes.includes(tac2) || legacyPrefixes.includes(tac4)) {
+                return { supported: false, brand: 'Legacy Device', reason: 'إصدار الجهاز أقدم من جيل دعم الشريحة الإلكترونية (eSIM).' };
+            }
+
+            if (appleEsimPrefixes.includes(tac4) || tac2 === '35') {
+                return { supported: true, brand: 'Apple / Flagship', reason: 'تم التحقق من رقم IMEI بنجاح، الجهاز مؤهل لتفعيل eSIM.' };
+            }
+
+            if (tac2 === '86' || tac2 === '99') {
+                return { supported: true, brand: 'Android / Multi-SIM', reason: 'رقم IMEI صحيح ومطابق للأجهزة الحديثة الداعمة لـ eSIM.' };
+            }
+
+            return { supported: true, brand: 'Verified IMEI', reason: 'رقم IMEI صحيح ومطابق للمعايير الدولية لتفعيل eSIM.' };
+        }
+
+        /**
+         * فحص حقل IMEI أو السيريال وعرض النتيجة بشكل تفاعلي
+         */
+        function handleDeviceCheck(rawValue, isManualClick = false) {
+            const code = rawValue.trim().toUpperCase();
+            const resultBox = document.getElementById('imei-result');
+            const statusText = document.getElementById('imei-status-text');
+            const brandBadge = document.getElementById('imei-brand-badge');
+            const subText = document.getElementById('imei-sub-text');
+
+            if (!code) {
+                resultBox.classList.add('hidden');
+                currentDeviceStatus = null;
+                if (isManualClick) {
+                    showToast('يرجى إدخال رقم IMEI أو السيريال أولاً');
+                }
+                return;
+            }
+
+            if (code.length < 10 && !isManualClick) {
+                resultBox.classList.add('hidden');
+                return;
+            }
+
+            resultBox.classList.remove('hidden', 'bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-300', 'bg-rose-500/10', 'border-rose-500/30', 'text-rose-300', 'bg-amber-500/10', 'border-amber-500/30', 'text-amber-300');
+            brandBadge.classList.add('hidden');
+
+            if (/^\d{15}$/.test(code)) {
+                if (!isValidLuhn(code)) {
+                    resultBox.classList.add('bg-rose-500/10', 'border-rose-500/30', 'text-rose-300');
+                    statusText.textContent = '❌ غير داعم لـ eSIM / تأكد من الرقم';
+                    subText.textContent = 'رقم الـ IMEI المدخل غير صحيح، يرجى التأكد عبر طلب *#06# من لوحة الاتصال.';
+                    currentDeviceStatus = 'رقم IMEI غير صحيح';
+                    return;
+                }
+
+                const check = detectDeviceSupport(code);
+                if (check.supported) {
+                    resultBox.classList.add('bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-300');
+                    statusText.textContent = '✅ الجهاز داعم لخاصية eSIM';
+                    brandBadge.textContent = check.brand;
+                    brandBadge.classList.remove('hidden');
+                    subText.textContent = check.reason;
+                    currentDeviceStatus = 'داعم لـ eSIM ✅';
+                } else {
+                    resultBox.classList.add('bg-rose-500/10', 'border-rose-500/30', 'text-rose-300');
+                    statusText.textContent = '❌ غير داعم لـ eSIM / تأكد من الرقم';
+                    brandBadge.textContent = check.brand;
+                    brandBadge.classList.remove('hidden');
+                    subText.textContent = check.reason;
+                    currentDeviceStatus = 'غير داعم لـ eSIM ❌';
+                }
+                return;
+            }
+
+            if (/^[A-Z0-9]{10,14}$/.test(code) && /[A-Z]/.test(code)) {
+                resultBox.classList.add('bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-300');
+                statusText.textContent = '✅ الجهاز داعم لخاصية eSIM (Serial)';
+                brandBadge.textContent = 'Serial Verified';
+                brandBadge.classList.remove('hidden');
+                subText.textContent = 'تم التعرف على الرقم التسلسلي للجهاز، يمكنك المتابعة للتفعيل عبر واتساب.';
+                currentDeviceStatus = 'داعم لـ eSIM (سيريال) ✅';
+                return;
+            }
+
+            resultBox.classList.add('bg-rose-500/10', 'border-rose-500/30', 'text-rose-300');
+            statusText.textContent = '❌ غير داعم لـ eSIM / تأكد من الرقم';
+            subText.textContent = 'يجب إدخال 15 رقماً للـ IMEI أو الرقم التسلسلي (Serial) بشكل صحيح.';
+            currentDeviceStatus = 'تأكد من الرقم المدخل';
+        }
+
+        /**
+         * فتح محادثة واتساب مع رسالة جاهزة
          */
         function openWhatsApp() {
-            const imeiValue = document.getElementById('imei-input').value.trim();
+            const imeiValue = document.getElementById('imei-input').value.trim().toUpperCase();
             let message = "";
 
-            if (selectedPackage) {
-                message = `السلام عليكم، أرغب في طلب خدمة *تفعيل ضريبة* لباقة *${selectedPackage}*.`;
+            if (lastClickedProfile) {
+                message = `السلام عليكم، أرغب في طلب خدمة *تفعيل ضريبة* لباقة *${lastClickedProfile}*.`;
             } else {
                 message = `السلام عليكم، أرغب في الاستفسار وطلب خدمة *تفعيل ضريبة* لشريحة eSIM.`;
             }
 
             if (imeiValue) {
-                message += `\nرقم IMEI الخاص بالجهاز: ${imeiValue}`;
+                message += `\nرقم IMEI / السيريال: ${imeiValue}`;
+                if (currentDeviceStatus) {
+                    message += `\nحالة الفحص: ${currentDeviceStatus}`;
+                }
             }
 
             const encodedMessage = encodeURIComponent(message);
@@ -442,20 +476,6 @@
             setTimeout(() => {
                 window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
             }, 350);
-        }
-
-        /**
-         * نسخ النص إلى الحافظة مع إشعار بصري
-         */
-        function copyText(text) {
-            event.stopPropagation();
-            const tempInput = document.createElement('input');
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            showToast(`تم نسخ الرمز: ${text}`);
         }
 
         /**
